@@ -80,6 +80,89 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
     }
 
     /**
+     * Inserta un nuevo elemento al inicio de la lista.
+     * Si la lista está vacía, el nuevo nodo se convierte en el primer nodo.
+     * Si no, el nuevo nodo apunta al primer nodo actual, y luego se actualiza la referencia
+     * para que 'first' apunte al nuevo nodo.
+     *
+     * @param data el elemento a insertar al inicio de la lista.
+     */
+    @Override
+    public void insertFirst(E data){
+
+        Node nodo = new Node(data);
+
+        if(this.isEmptyList()){
+            this.first = nodo;
+        }else{
+            nodo.next = this.first;
+            this.first = nodo;
+        }
+    }
+
+    /**
+     * Inserta un nuevo elemento al final de la lista.
+     * Si la lista está vacía, el nuevo nodo se convierte en el primer nodo.
+     * De lo contrario, se recorre la lista hasta el último nodo y se enlaza el nuevo nodo
+     * como siguiente, convirtiéndolo en el nuevo último nodo.
+     *
+     * @param data el elemento a insertar al final de la lista.
+     */
+    @Override
+    public void insertLast(E data){
+        Node nodo = new Node(data);
+
+        if(this.isEmptyList()){
+            this.first = nodo;
+        }else{
+            Node actual = this.first;
+
+            while(actual.next != null){
+                actual = actual.next;
+            }
+
+            actual.next = nodo;
+        }
+    }
+
+    /**
+     * Elimina el primer nodo que contiene el elemento especificado.
+     * Si el elemento no existe o la lista está vacía, retorna false.
+     * Si el elemento es encontrado y eliminado, reorganiza los enlaces
+     * para mantener la continuidad de la lista.
+     *
+     * @param data el elemento a eliminar
+     * @return true si se eliminó correctamente, false en caso contrario
+     */
+    @Override
+    public boolean remove(E data){
+        //if(data == null) throw new IllegalArgumentException();
+        
+        //Condiciones Iniciales
+        if(this.isEmptyList()) return false;
+
+        if(this.first.data.compareTo(data) == 0){
+            this.first = this.first.next;
+            return true;
+        }
+
+        //Buscar el nodo a remover
+        Node nodoA = this.first; //Nodo Actual
+
+        while(nodoA.next != null && nodoA.next.data.compareTo(data) != 0){
+            nodoA = nodoA.next;
+        }
+
+        if(nodoA.next == null) return false;
+
+        nodoA.next = nodoA.next.next;
+        return true;
+
+    }
+
+    
+
+    /**
      * Clase interna que representa un nodo de la lista.
      * Cada nodo almacena un dato genérico @param <E> y una referencia al siguiente nodo.
      *
