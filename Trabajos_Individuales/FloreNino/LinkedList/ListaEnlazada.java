@@ -160,7 +160,18 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
 
     }
 
-    
+    /*
+     * 
+     */
+    @Override
+    public void sort(int order){
+
+        if(this.isEmptyList()) return;
+        if(order == 0) throw new IllegalArgumentException("Argumento de orden invalido. " + order);
+
+        //Insertion Sort
+        
+    }
 
     /**
      * Clase interna que representa un nodo de la lista.
