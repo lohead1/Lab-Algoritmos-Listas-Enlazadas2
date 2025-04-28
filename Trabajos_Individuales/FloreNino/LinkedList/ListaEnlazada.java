@@ -2,7 +2,29 @@ package LinkedList;
 
 public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
     
+    /**
+     * Atributos
+     * first -> Referencia al primer elemento de la lista
+     */
+    
+    private Node first;
 
+     //Constructor
+    public ListaEnlazada(){
+        this.first = null;
+    }
+
+    //-----Implementacion de los metodos de la interfaz
+    /**
+     * Verifica si la lista está vacía.
+     * Si la referencia al primer nodo es nula, significa que no hay elementos en la lista.
+     *
+     * @return true si la lista no tiene ningún elemento, false en caso contrario.
+     */
+    @Override
+    public boolean isEmptyList(){
+        return this.first == null;
+    }
 
 
     /**
