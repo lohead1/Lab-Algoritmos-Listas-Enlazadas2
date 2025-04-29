@@ -2,32 +2,32 @@ package sesion5;
 
 public class Main {
     public static void main(String[] args) {
-        GestorDeTareas<String> gestor = new GestorDeTareas<>();
+    	 GestorDeTareas<Tarea> gestor = new GestorDeTareas<>();
 
-        //Agregar tareas
-        gestor.agregarTarea("hacer reporte");
-        gestor.agregarTarea("enviar correo");
-        gestor.agregarTarea("eevisar código");
+         // 1. Agregar tareas
+         gestor.agregarTarea(new Tarea("Hacer reporte", 2));
+         gestor.agregarTarea(new Tarea("Enviar correo", 5));
+         gestor.agregarTarea(new Tarea("Revisar código", 1));
 
-        //Eliminar una tarea
-        gestor.eliminarTarea("enviar correo");
+         // 2. Eliminar una tarea
+         gestor.eliminarTarea(new Tarea("Enviar correo", 5));
 
-        //Imprimir tareas actuales
-        gestor.imprimirTareas();
+         // 3. Imprimir tareas actuales
+         gestor.imprimirTareas();
 
-        //Verificar si existe una tarea
-        System.out.println("Existe 'Hacer reporte'? " + gestor.contieneTarea("Hacer reporte"));
-        System.out.println("Existe 'Enviar correo'? " + gestor.contieneTarea("Enviar correo"));
+         // 4. Verificar si existe una tarea
+         System.out.println("¿Existe 'Hacer reporte'? " + gestor.contieneTarea(new Tarea("Hacer reporte", 2)));
+         System.out.println("¿Existe 'Enviar correo'? " + gestor.contieneTarea(new Tarea("Enviar correo", 5)));
 
-        //Invertir lista de tareas
-        gestor.invertirTareas();
-        gestor.imprimirTareas();
+         // 5. Invertir lista de tareas
+         gestor.invertirTareas();
+         gestor.imprimirTareas();
 
-        //Completar una tarea
-        gestor.completarTarea("Revisar codigo");
+         // 6. Completar una tarea
+         gestor.completarTarea(new Tarea("Revisar código", 1));
 
-        //Mostrar tareas pendientes y completadas
-        gestor.imprimirTareas();
-        gestor.imprimirTareasCompletadas();
-    }
+         // 7. Mostrar tareas pendientes y completadas
+         gestor.imprimirTareas();
+         gestor.imprimirTareasCompletadas();
+     }
 }
