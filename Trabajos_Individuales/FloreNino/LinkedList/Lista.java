@@ -8,7 +8,7 @@ package LinkedList;
  * @param <E> el tipo de elementos que almacena la lista, que debe ser comparable.
  */
 
-public interface Lista <E extends Comparable<E>> {
+public interface Lista <E extends Comparable<E>> extends Iterable<E> {
     public boolean isEmptyList();
     public int length();
     public void destroyList();
