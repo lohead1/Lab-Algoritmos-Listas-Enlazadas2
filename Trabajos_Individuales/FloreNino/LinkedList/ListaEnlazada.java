@@ -138,7 +138,7 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
         //Condiciones Iniciales
         if(this.isEmptyList()) return false;
 
-        if(this.first.data.compareTo(data) == 0){
+        if(this.first.data.equals(data)){
             this.first = this.first.next;
             return true;
         }
@@ -146,7 +146,7 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
         //Buscar el nodo a remover
         Node nodoA = this.first; //Nodo Actual
 
-        while(nodoA.next != null && nodoA.next.data.compareTo(data) != 0){
+        while(nodoA.next != null && !nodoA.next.data.equals(data)){
             nodoA = nodoA.next;
         }
 

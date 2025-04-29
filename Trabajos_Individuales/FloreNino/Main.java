@@ -9,8 +9,10 @@ public class Main {
         gestor.agregarTarea(new Tarea("Comprar víveres", 1));
 
         // 3. Eliminar alguna tarea
-        gestor.eliminarTarea(new Tarea("Comprar víveres", 2)); // solo importa el nombre en equals()
-
+        System.out.println("Se pudo eliminar la Tarea: " + 
+        gestor.eliminarTarea(new Tarea("Comprar víveres", 2)));
+        
+        
         // 4. Imprimir todas las tareas actuales
         System.out.println("Tareas actuales:");
         gestor.imprimirTareas();
@@ -24,7 +26,7 @@ public class Main {
 
         // 7. Transferir tarea a lista de completadas
         
-        Tarea tareaCompletada = new Tarea("Hacer ejercicio", 0);
+        Tarea tareaCompletada = new Tarea("Ejercicios", 2);
         gestor.completarTarea(tareaCompletada);
 
         // 8. Mostrar ambas listas
