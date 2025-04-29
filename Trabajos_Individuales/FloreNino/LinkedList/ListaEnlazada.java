@@ -206,26 +206,26 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
         return max;
     }
 
-
     /**
-     * Invierte el orden de los elementos en la lista sin usar una variable 'previous'.
-     * Inserta cada nodo al inicio de una nueva lista construida en el proceso.
+     * Invierte el orden de los elementos en la lista.
+     * Inserta cada nodo al inicio de una nueva lista auxiliar
      */
     @Override
     public void reverse() {
         if (this.isEmptyList()) return;
 
-        Node nuevo = null;
+        ListaEnlazada<E> aux = new ListaEnlazada<>();
+        Node actual = this.first;
 
-        while (this.first != null) {
-            Node temp = this.first;
-            this.first = this.first.next;
-
-            temp.next = nuevo;
-            nuevo = temp;
+        while(actual != null) {
+            
+        	aux.insertFirst(actual.data);
+        	actual = actual.next;
+        	
         }
 
-        this.first = nuevo;
+        this.first = aux.first;
+
     }
 
     /**
