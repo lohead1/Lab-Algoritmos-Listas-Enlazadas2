@@ -1,13 +1,10 @@
 package LinkedList;
+import java.util.Iterator;
 
 public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
     
-    /**
-     * Atributos
-     * first -> Referencia al primer elemento de la lista
-     */
-    
-    private Node first;
+    //Atributos
+    private Node first; //Referencia al Primer Nodo
     
     //Constructor
     public ListaEnlazada(){
@@ -160,22 +157,94 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
 
     }
 
-    /*
-     * 
+    /**
+     * Verifica si un elemento específico existe en la lista.
+     *
+     * @param obj el elemento a buscar en la lista.
+     * @return true si el elemento está presente en la lista; false en caso contrario.
      */
     @Override
-    public void sort(int order){
+    public boolean contains(E obj) {
+        /* ----Otra implementación
+        Node actual = this.first;
 
-        if(this.isEmptyList()) return;
-        if(order == 0) throw new IllegalArgumentException("Argumento de orden invalido. " + order);
+        while (actual != null) {
+            if (actual.data.compareTo(obj) == 0) {
+                return true;
+            }
+            actual = actual.next;
+        }
 
-        //Insertion Sort
+        return false;
+        */
+
+        return (this.search(obj) != -1);
+    }
+
+    /**
+     * Retorna el elemento máximo de la lista, según el orden natural definido por {@code compareTo}.
+     *
+     * @return el elemento de mayor valor en la lista, o {@code null} si la lista está vacía.
+     */
+    @Override
+    public E getMax() {
+
+        if(this.isEmptyList()) return null;
+
+        Node actual = this.first;
+        E max = this.first.data;
+
+        while(actual != null) {
+            
+            if(actual.data.compareTo(max) > 0) {
+                max = actual.data;
+            }
+
+            actual = actual.next;
+        }
+
+        return max;
+    }
+
+
+    /**
+     * Invierte el orden de los elementos en la lista sin usar una variable 'previous'.
+     * Inserta cada nodo al inicio de una nueva lista construida en el proceso.
+     */
+    @Override
+    public void reverse() {
+        if (this.isEmptyList()) return;
+
+        Node nuevo = null;
+
+        while (this.first != null) {
+            Node temp = this.first;
+            this.first = this.first.next;
+
+            temp.next = nuevo;
+            nuevo = temp;
+        }
+
+        this.first = nuevo;
+    }
+
+    /**
+     * Retorna un iterador para recorrer esta lista usando un bucle for-each.
+     *
+     * Este método es requerido por la interfaz Iterable, lo cual permite
+     * recorrer los elementos de la lista.
+     *
+     * @return un objeto Iterator que recorre los elementos de la lista.
+     */
+    @Override
+    public Iterator<E> iterator() {
+        return new IteradorLista();
         
     }
 
     /**
      * Clase interna que representa un nodo de la lista.
-     * Cada nodo almacena un dato genérico @param <E> y una referencia al siguiente nodo.
+     * Cada nodo almacena un dato genérico @param E y una referencia al siguiente nodo.
      *
      */
     private class Node {
@@ -194,6 +263,37 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
         public Node(E data) {
             this.data = data;
             this.next = null;
+        }
+    }
+
+    // Clase interna que actúa como iterador
+    private class IteradorLista implements Iterator<E> {
+        private Node actual;
+
+        //Constructor
+        public IteradorLista() {this.actual = first;}
+
+
+        /**
+         * Indica si hay un siguiente elemento en la lista.
+         *
+         * @return true si hay otro nodo por recorrer, false si se llegó al final.
+         */
+        @Override
+        public boolean hasNext() {
+            return actual != null;
+        }
+
+        /**
+         * Retorna el siguiente elemento de la lista y avanza al siguiente nodo.
+         *
+         * @return El dato almacenado en el nodo actual.
+         */
+        @Override
+        public E next() {
+            E dato = actual.data;
+            actual = actual.next;
+            return dato;
         }
     }
 

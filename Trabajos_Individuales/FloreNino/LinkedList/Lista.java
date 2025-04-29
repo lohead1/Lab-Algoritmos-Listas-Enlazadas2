@@ -18,5 +18,5 @@ public interface Lista <E extends Comparable<E>> extends Iterable<E> {
     public boolean remove(E obj);
     public void reverse(); 
     public boolean contains(E obj);
-    public E getMax(E obj);
+    public E getMax();
 }
