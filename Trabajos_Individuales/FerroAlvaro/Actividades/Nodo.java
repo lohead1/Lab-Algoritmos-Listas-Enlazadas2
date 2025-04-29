@@ -1,6 +1,4 @@
-package a;
-
-import a.Lista.Nodo;
+package b;
 
 /**
  * Clase Nodo generica
@@ -21,10 +19,10 @@ public class Nodo<T> {
 /**
  * se crea una lista enlazada genérica.
  */
-class Listaenlazada<T extends Comparable<T>>{
+class ListaEnlazada<T extends Comparable<T>>{
 	private Nodo<T> first;  // es la referencia al primer nodo de la lista
 		
-	public Listaenlazada(){
+	public ListaEnlazada(){
 		this.first=null;  // la primera referencia se inicializa con null porque no hay nodos
 	}
 	
@@ -73,15 +71,29 @@ class Listaenlazada<T extends Comparable<T>>{
 		}
 		return -1; // Si no lo encuentra
 	}
+	public boolean contiene(T dato) {
+    	if(this.isEmptylist()) {
+    		return false;
+    	}else { 
+    		Nodo<T> actual=first; 
+    		while(actual!=null) {
+    			if(actual.dato.compareTo(dato)==0) {
+    				return true;
+    			}
+    			actual=actual.next;
+    		}
+    		return false; 
+    	}
+    }
 	/**
 	 * Se crea la funcion para insertar primero
 	 * @param data el dato a insertar
 	 */
-	public void insertfirst(T data) {
+	public void insertfirst(T dato) {
 		if(isEmptylist()) { // verifica si esta vacia la lista 
-			 first = new Nodo<>(data); // si esta vacia se crea un nuevo nodo 
+			 first = new Nodo<>(dato); // si esta vacia se crea un nuevo nodo 
 		}else {
-			Nodo<T> nuevoN= new Nodo<>(data);  // en caso no este vacia tmb se crea un nuevo nodo
+			Nodo<T> nuevoN= new Nodo<>(dato);  // en caso no este vacia tmb se crea un nuevo nodo
 			nuevoN.next=first;                 // nuevo nodo va a apuntar al actual primer nodo
 			first=nuevoN;					   //  Ahora el nuevo nodo es el primero
 			
@@ -91,15 +103,15 @@ class Listaenlazada<T extends Comparable<T>>{
 	 * Se crea la funcion para insertar al final
 	 * @param data el dato a insertar
 	 */
-	public void insertend(T data) {
+	public void insertend(T dato) {
 		if(isEmptylist()) {    // verifica si esta vacia la lista 
-			 first = new Nodo<>(data);  // si esta vacia se crea un nuevo nodo 
+			 first = new Nodo<>(dato);  // si esta vacia se crea un nuevo nodo 
 		}else {
 			Nodo<T> NC=first;   //crea un referencia que apunte al primer elemento
 			while(NC.next!=null) { // se va a recorre todo los nodos mientras no llegue al final
 				NC=NC.next; // Mueve NC al siguiente nodo
 			}
-			Nodo<T> nuevoN= new Nodo<>(data);  // Crea un nuevo nodo con el dato proporcionado
+			Nodo<T> nuevoN= new Nodo<>(dato);  // Crea un nuevo nodo con el dato proporcionado
 			NC.next=nuevoN;    // Enlaza el último nodo con el nuevo nodo
 		}
 	}
@@ -107,15 +119,15 @@ class Listaenlazada<T extends Comparable<T>>{
 	 * Elimina el primer nodo que contiene el dato proporcionado
 	 * @param data el dato que se desea eliminar
 	 */
-		public void remove(T data) {
+		public void remove(T dato) {
 			if(!isEmptylist()) {  // Verifica si la lista no está vacía
 				Nodo<T> NC=first; // Nodo actual	
-				if(NC.dato.compareTo(data)==0) {    // Si el primer nodo contiene el dato a eliminar
+				if(NC.dato.compareTo(dato)==0) {    // Si el primer nodo contiene el dato a eliminar
 					first = first.next;  // Se actualiza el primer nodo para que apunte al siguiente nodo
 				}
 			}else {   // Si el dato no está en el primer nodo, recorremos la lista
 				Nodo<T> NC=first;
-				while(NC.next!=null && NC.next.dato.compareTo(data) != 0) {
+				while(NC.next!=null && NC.next.dato.compareTo(dato) != 0) {
 					NC=NC.next; // Avanza al siguiente nodo
 				}
 				if(NC.next==null) {  // Si llegamos al final y no encontramos el dato
@@ -123,6 +135,32 @@ class Listaenlazada<T extends Comparable<T>>{
 					NC.next=NC.next.next; 
 				}
 			}
+		}
+		public boolean borrar(T dato) {
+			if(first==null) {
+				return false;
+			}if(first.dato.equals(dato)) {
+				first=first.next;
+				return true;
+			}
+			Nodo<T> NC=first;
+			 while (NC.next != null && !NC.next.dato.equals(dato)) {
+				 NC=NC.next;
+			 }
+			 if(NC.next==null) {  // Si llegamos al final y no encontramos el dato
+				}else {
+					NC.next=NC.next.next; 
+					return true;
+		}
+		return false; 
 	}
-	
+		public void imprimir() {
+	        Nodo<T> NC = first; // Nodo actual para recorrer desde el principio
+	        while ( NC != null) { // Mientras existan nodos
+	            System.out.println("- " + NC.dato); // Imprimimos el dato
+	            NC = NC.next; // Avanzamos al siguiente nodo
+	        }
 }
+}
+	
+
