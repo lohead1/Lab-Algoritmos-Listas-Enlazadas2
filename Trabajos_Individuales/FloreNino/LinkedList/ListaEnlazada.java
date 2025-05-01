@@ -4,12 +4,15 @@ import java.util.Iterator;
 public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
     
     //Atributos
-    private Node first; //Referencia al Primer Nodo
+    private Node<E> first; //Referencia al Primer Nodo
     
     //Constructor
     public ListaEnlazada(){
         this.first = null;
     }
+
+    //Obtener el primer nodo
+    public Node<E> getFirst() {return this.first;}
 
     //-----Implementacion de los metodos de la interfaz
     /**
@@ -33,7 +36,7 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
     @Override
     public int length(){
         int size = 0;
-        Node nodoActual = this.first;
+        Node<E> nodoActual = this.first;
         
         while(nodoActual != null){
             nodoActual = nodoActual.next;
@@ -63,7 +66,7 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
         if (this.isEmptyList()) return -1;
     
         int index = 0;
-        Node actual = this.first;
+        Node<E> actual = this.first;
     
         while (actual != null) {
             if (actual.data.compareTo(data) == 0) {
@@ -87,7 +90,7 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
     @Override
     public void insertFirst(E data){
 
-        Node nodo = new Node(data);
+        Node<E> nodo = new Node<E>(data);
 
         if(this.isEmptyList()){
             this.first = nodo;
@@ -107,12 +110,12 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
      */
     @Override
     public void insertLast(E data){
-        Node nodo = new Node(data);
+        Node<E> nodo = new Node<>(data);
 
         if(this.isEmptyList()){
             this.first = nodo;
         }else{
-            Node actual = this.first;
+            Node<E> actual = this.first;
 
             while(actual.next != null){
                 actual = actual.next;
@@ -144,7 +147,7 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
         }
 
         //Buscar el nodo a remover
-        Node nodoA = this.first; //Nodo Actual
+        Node<E> nodoA = this.first; //Nodo Actual
 
         while(nodoA.next != null && !nodoA.next.data.equals(data)){
             nodoA = nodoA.next;
@@ -191,7 +194,7 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
 
         if(this.isEmptyList()) return null;
 
-        Node actual = this.first;
+        Node<E> actual = this.first;
         E max = this.first.data;
 
         while(actual != null) {
@@ -215,13 +218,13 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
         if (this.isEmptyList()) return;
 
         ListaEnlazada<E> aux = new ListaEnlazada<>();
-        Node actual = this.first;
+        Node<E> actual = this.first;
 
         while(actual != null) {
             
-        	aux.insertFirst(actual.data);
-        	actual = actual.next;
-        	
+            aux.insertFirst(actual.data);
+            actual = actual.next;
+        
         }
 
         this.first = aux.first;
@@ -242,33 +245,10 @@ public class ListaEnlazada <E extends Comparable<E>> implements Lista<E> {
         
     }
 
-    /**
-     * Clase interna que representa un nodo de la lista.
-     * Cada nodo almacena un dato genérico @param E y una referencia al siguiente nodo.
-     *
-     */
-    private class Node {
-        /** Valor genérico a guardar en el nodo. */
-        private E data;
-
-        /** Referencia al siguiente nodo en la lista. */
-        private Node next;
-
-        /**
-         * Crea un nuevo nodo con el dato especificado.
-         * La referencia al siguiente nodo se inicializa como null.
-         *
-         * @param data el dato que se almacenará en el nodo.
-         */
-        public Node(E data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
 
     // Clase interna que actúa como iterador
     private class IteradorLista implements Iterator<E> {
-        private Node actual;
+        private Node<E> actual;
 
         //Constructor
         public IteradorLista() {this.actual = first;}
