@@ -32,6 +32,9 @@ public class Main {
         // 8. Mostrar ambas listas
         gestor.imprimirTareas();
         gestor.imprimirTareasCompletadas();
+
+        //--------------------EJERCICIOS
+        
         
     }
 }
