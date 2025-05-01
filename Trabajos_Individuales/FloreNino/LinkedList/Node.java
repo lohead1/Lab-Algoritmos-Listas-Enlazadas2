@@ -11,6 +11,10 @@ public class Node <E> {
     public E getData() {return this.data;}
     public Node<E> getNext() {return this.next;}
     
+    //Setters
+    public void setData(E data) {this.data = data;}
+    public void setNext(Node<E> next) {this.next = next;}
+
     /**
      * Crea un nuevo nodo con el dato especificado.
      * La referencia al siguiente nodo se inicializa como null.
