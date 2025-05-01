@@ -7,7 +7,9 @@ public class Node <E> {
     /** Referencia al siguiente nodo en la lista. */
     protected Node <E> next;
 
-    
+    //Getters
+    public E getData() {return this.data;}
+    public Node<E> getNext() {return this.next;}
     
     /**
      * Crea un nuevo nodo con el dato especificado.
